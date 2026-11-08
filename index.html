@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ahiyaniwa Taíno — Language Revitalization</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root{
+    --deep: #0a2e2c;
+    --deep-2: #114a47;
+    --sea: #1a6b64;
+    --turquoise: #2bb3a3;
+    --sand: #fbf7ef;
+    --sand-2: #f2e8d5;
+    --coral: #e86a4a;
+    --gold: #d6a84b;
+    --ink: #1c2e2d;
+    --muted: #5d6f6c;
+    --white: #ffffff;
+    --line: rgba(10,46,44,.1);
+    --shadow: 0 12px 40px rgba(10,46,44,.08);
+    --radius: 16px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  
+  body{
+    margin:0;
+    color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(43,179,163,.12), transparent 40rem),
+      radial-gradient(circle at 90% 10%, rgba(232,106,74,.08), transparent 35rem),
+      linear-gradient(180deg, #ffffff 0%, var(--sand) 100%);
+    min-height:100vh;
+    line-height: 1.65;
+  }
+
+  a{color:var(--sea); text-decoration-thickness:1.5px; text-underline-offset:3px; transition: color .2s ease;}
+  a:hover { color: var(--turquoise); }
+  
+  h1,h2,h3,h4{font-family:"Cormorant Garamond", Georgia, serif; letter-spacing:.01em; margin:0; font-weight: 600;}
+  h1{font-size:clamp(3rem,6vw,5.5rem); line-height:.95; color: var(--white);}
+  h2{font-size:clamp(2.2rem,3.5vw,3.2rem); color:var(--deep); margin-bottom: 0.5rem;}
+  h3{font-size:1.6rem; color:var(--deep-2); margin-bottom: 0.5rem;}
+  p{line-height:1.75; margin:.7rem 0; font-weight: 300; color: var(--ink);}
+  .small{font-size:.9rem; color:var(--muted);}
+
+  .shell{width:min(1180px, calc(100% - 48px)); margin:0 auto}
+
+  /* HERO */
+  header.hero{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(43,179,163,.35), transparent 30rem),
+      radial-gradient(circle at 85% 15%, rgba(214,168,75,.25), transparent 25rem),
+      linear-gradient(135deg, #061e1d 0%, #0a2e2c 40%, #114a47 100%);
+    padding:32px 0 80px;
+    box-shadow: inset 0 -20px 40px -20px rgba(0,0,0,0.3);
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; inset:auto 0 0 0; height:120px;
+    background:linear-gradient(180deg, transparent, rgba(251,247,239,1));
+    pointer-events:none;
+  }
+  .topline{display:flex; align-items:center; justify-content:space-between; gap:18px; position:relative; z-index:2}
+  .brand{display:flex; align-items:center; gap:14px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; font-size:.75rem; color: rgba(255,255,255,.8);}
+  .brand-mark{
+    width:44px; height:44px; border-radius:50%;
+    display:grid; place-items:center;
+    background:linear-gradient(135deg, var(--gold), var(--coral));
+    color:#0a2e2c; font-family:"Cormorant Garamond",serif; font-size:1.5rem; font-weight:700;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);
+  }
+  .hero-copy{position:relative; z-index:2; padding:80px 0 40px; max-width:850px}
+  .eyebrow{text-transform:uppercase; letter-spacing:.25em; font-size:.75rem; font-weight:700; color:var(--turquoise); margin-bottom:20px}
+  .hero-copy p{font-size:1.15rem; max-width:700px; color:#d1e3e0; font-weight: 300; line-height: 1.6;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
+  
+  .btn{
+    border:0; cursor:pointer; border-radius:99px; padding:14px 24px;
+    font-family:Inter,sans-serif; font-weight:600; font-size:.9rem;
+    transition:.25s ease; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--gold); color:#0a2e2c; box-shadow:0 10px 25px rgba(214,168,75,.3)}
+  .btn-primary:hover{transform:translateY(-2px); background:#e4ba62; box-shadow:0 14px 30px rgba(214,168,75,.4);}
+  .btn-ghost{background:rgba(255,255,255,.08); color:var(--white); border:1px solid rgba(255,255,255,.2)}
+  .btn-ghost:hover{background:rgba(255,255,255,.15); transform:translateY(-2px);}
+
+  /* NAVIGATION */
+  nav.tabs{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,247,239,.85);
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 4px 20px rgba(10,46,44,.04);
+  }
+  .tabs-inner{display:flex; gap:8px; overflow-x:auto; padding:16px 0; scrollbar-width:none;}
+  .tabs-inner::-webkit-scrollbar { display: none; }
+  .tab{
+    border:1px solid transparent; background:transparent; color:var(--deep);
+    padding:10px 18px; border-radius:99px; cursor:pointer; font-weight:600;
+    font-size:.9rem; white-space:nowrap; transition:.25s ease;
+  }
+  .tab:hover{background:rgba(43,179,163,.08); color: var(--deep-2);}
+  .tab.active{background:var(--deep); color:var(--white); box-shadow:0 6px 16px rgba(10,46,44,.15)}
+
+  /* MAIN LAYOUT */
+  main{padding:60px 0 100px}
+  .page{display:none; animation:fade .4s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+
+  .section-head{margin-bottom:40px; max-width: 800px;}
+  .section-head p{font-size: 1.1rem;}
+  
+  .grid{display:grid; gap:24px}
+  .grid-2{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .grid-3{grid-template-columns:repeat(3, minmax(0,1fr))}
+  .grid-4{grid-template-columns:repeat(4, minmax(0,1fr))}
+  
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow:var(--shadow);
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 50px rgba(10,46,44,.12);
+  }
+  .card.accent{border-top:6px solid var(--turquoise)}
+  .card.coral{border-top:6px solid var(--coral)}
+  .card.gold{border-top:6px solid var(--gold)}
+  
+  .pill{
+    display:inline-block; padding:6px 14px; border-radius:99px;
+    background:rgba(43,179,163,.12); color:var(--deep-2);
+    font-size:.75rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom: 1rem;
+  }
+  .pill.coral{background:rgba(232,106,74,.12); color:#9d3e27}
+  .pill.gold{background:rgba(214,168,75,.15); color:#7a5716}
+
+  /* ALPHABET */
+  .alphabet-grid {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+    gap: 16px; 
+    margin-top: 24px;
+  }
+  .letter-card {
+    background: linear-gradient(145deg, #1c2e2d, #0a2e2c);
+    border-radius: 16px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(10,46,44,.15);
+    border: 1px solid rgba(255,255,255,.05);
+    transition: transform .2s ease;
+  }
+  .letter-card:hover { transform: translateY(-2px); }
+  .letter-char {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .letter-ipa {
+    font-family: Inter, sans-serif;
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--turquoise);
+    background: rgba(43,179,163,.15);
+    padding: 4px 10px;
+    border-radius: 99px;
+    letter-spacing: .05em;
+  }
+
+  /* TABLES */
+  .table-container {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  th {
+    background: var(--deep);
+    color: var(--white);
+    padding: 16px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(43,179,163,.03); }
+  td.phoneme {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--deep-2);
+  }
+
+  /* DICTIONARY */
+  .dict-tools{display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom:24px}
+  input[type="search"]{
+    width:100%; border:1px solid rgba(10,46,44,.15); border-radius:12px;
+    background:var(--white); color:var(--ink); padding:16px 20px;
+    font:inherit; outline:none; transition:.2s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,.02);
+  }
+  input[type="search"]:focus{border-color:var(--turquoise); box-shadow:0 0 0 4px rgba(43,179,163,.12)}
+  .search-wrap{flex:1 1 300px; max-width:500px}
+  .count{font-weight:700; color:var(--deep-2); font-size:.95rem}
+  .dict-table-wrap{max-height:700px; overflow:auto; border-radius:var(--radius); border:1px solid var(--line); box-shadow:var(--shadow); background: var(--white);}
+  .dict-table-wrap th { position: sticky; top: 0; z-index: 10; }
+  
+  .lemma { font-family: "Cormorant Garamond", serif; font-size: 1.3rem; font-weight: 700; color: var(--deep); }
+
+  /* EXAMPLES */
+  .example-card { border-left: 4px solid var(--coral); padding: 24px; background: var(--white); border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow); border-top: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);}
+  .example-card .ta{font-family:"Cormorant Garamond",serif; font-size:1.5rem; color:var(--deep); font-weight: 700; margin-bottom:8px; line-height: 1.3;}
+  .example-card .en{color:var(--muted); font-size:1rem; font-style: italic;}
+  .breakdown{font-size:.9rem; color:var(--muted); margin-top:14px; line-height:1.6; padding-top: 12px; border-top: 1px dashed var(--line);}
+  
+  /* NOTES & CALLOUTS */
+  .note{
+    border-left:4px solid var(--gold); background:rgba(214,168,75,.08);
+    padding:20px 24px; border-radius:0 var(--radius) var(--radius) 0; color:#5a4a2a;
+    margin: 24px 0;
+  }
+  .orthography{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;
+  }
+  .orthography span{background:rgba(10,46,44,.05); border:1px solid var(--line); border-radius:99px; padding:8px 14px; font-size:.85rem; font-weight:600; color:var(--deep)}
+
+  /* FOOTER */
+  footer{padding:40px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.9rem; background: var(--white);}
+  .footer-inner{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items: center;}
+
+  @media (max-width: 900px){
+    .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+    .hero-copy{padding-top:60px}
+  }
+  @media (max-width: 560px){
+    .shell{width:calc(100% - 32px)}
+    .card{padding:24px}
+    th,td{padding:12px 16px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="shell">
+    <div class="topline">
+      <div class="brand"><span class="brand-mark">A</span> Ahiyaniwa Taíno</div>
+      <span class="pill gold" style="margin:0; border: 1px solid rgba(214,168,75,.4); background: transparent; color: var(--gold);">Revitalization Project</span>
+    </div>
+    <div class="hero-copy">
+      <div class="eyebrow">Caribbean Arawakan Language</div>
+      <h1>Ahiyaniwa</h1>
+      <p><strong>“Language.”</strong> A modern, carefully reconstructed Taíno language rooted in Classical sources, Arawakan comparison, and the living rhythm of the Caribbean.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-goto="dictionary">Browse the Dictionary</button>
+        <button class="btn btn-ghost" data-goto="grammar">Explore the Grammar</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Primary navigation">
+  <div class="shell tabs-inner">
+    <button class="tab active" data-page="overview">Overview</button>
+    <button class="tab" data-page="mission">Mission</button>
+    <button class="tab" data-page="alphabet">Alphabet</button>
+    <button class="tab" data-page="phonology">Phonology</button>
+    <button class="tab" data-page="grammar">Grammar</button>
+    <button class="tab" data-page="dictionary">Dictionary</button>
+    <button class="tab" data-page="examples">Examples</button>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="page active">
+    <div class="section-head">
+      <span class="pill">Overview</span>
+      <h2>A modern Taíno language</h2>
+      <p>Ahiyaniwa is a modern revitalization of the Taíno language of the Greater Antilles. It is being created by <strong>Casey Alberto Roche</strong>, a Cuban-American linguist with distant Taíno ancestry. The project is still in its early stages, but work continues every day.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <article class="card accent">
+        <h3>The name</h3>
+        <p><strong>Ahiyaniwa</strong> means “language,” built from <em>ahiya</em> “to speak” plus the nominalizing material <em>-niwa</em>. The name keeps the language centered on speech, community, and everyday use.</p>
+      </article>
+      <article class="card coral">
+        <h3>Arawakan roots</h3>
+        <p>Taíno is a Ta-Arawakan language. Ahiyaniwa follows Arawakan patterns: pronominal prefixes, agglutinative verbs, postpositions, stative predication, and an open-syllable aesthetic.</p>
+      </article>
+      <article class="card gold">
+        <h3>Authenticity first</h3>
+        <p>There are a few Taíno reconstructions in circulation. Ahiyaniwa strives to maintain <strong>Arawakan authenticity</strong> by working from colonial sources, historical linguistics, and close sister languages such as Lokono and Wayuu.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>Project status</h3>
+        <p>Ahiyaniwa is in its early stages. The dictionary is already substantial, the grammar is being standardized, and the lexicon is expanding. It is a work in progress — and it is worked on every day.</p>
+      </article>
+      <article class="card">
+        <h3>Orthography standard</h3>
+        <p>This site uses a consistent modern spelling: accent marks on verb suffixes, tildes for nasal vowels, and an apostrophe between a prefix and a vowel-initial root.</p>
+        <div class="orthography">
+          <span>Verb suffixes: -ká, -bá, -bó, -há, -té</span>
+          <span>Nasal vowels: ã, ẽ, ĩ, õ, ũ</span>
+          <span>Elision: d'ahiya, b'ata, w'okona</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section id="mission" class="page">
+    <div class="section-head">
+      <span class="pill coral">Mission</span>
+      <h2>Reconnecting a Caribbean language</h2>
+      <p>For a long time, conventional wisdom said Taíno was completely gone, leaving behind only loanwords such as <em>hamaka</em> “hammock,” <em>hurakã</em> “hurricane,” <em>kanowa</em> “canoe,” and <em>tabako</em> “tobacco.” Ahiyaniwa refuses to let the language stay a footnote in history.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card accent">
+        <h3>Why this project exists</h3>
+        <p>For Casey Alberto Roche, a Cuban-American linguist with distant Taíno ancestry, this work is deeply personal. Reconstructing the linguistic roots of the Caribbean is not a dry academic exercise; it is a way of reconnecting with heritage. That connection — and disappointment with existing Taíno reconstructions — is what sparked the creation of Ahiyaniwa.</p>
+        <p>Ahiyaniwa is still in its early stages, but it is not static. Work continues every day: refining the lexicon, testing grammatical patterns, standardizing spelling, and expanding the available materials.</p>
+      </article>
+      <article class="card coral">
+        <h3>Arawakan authenticity</h3>
+        <p>A few Taíno reconstructions exist, but Ahiyaniwa is built to stay close to Arawakan structure. It does not invent forms out of thin air. It follows the linguistic breadcrumbs left by 16th-century sources, historical linguists, and sister languages.</p>
+        <p>The goal is not merely to make “Taíno-sounding” words. The goal is a usable language with authentic Arawakan morphology, syntax, and phonological shape.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>From colonial sources</h3>
+        <p>Chroniclers such as Fray Ramón Pané, Bartolomé de las Casas, and Gonzalo Fernández de Oviedo recorded Taíno words, place names, personal names, and short phrases. But they were not trained phoneticians. They used 16th-century Spanish spelling, which is why historical spellings like <em>Buren</em>, <em>Caiman</em>, and <em>Tiburon</em> must be filtered into forms like <em>bure</em>, <em>kaimã</em>, and <em>tiburõ</em>.</p>
+      </article>
+      <article class="card">
+        <h3>From sister languages</h3>
+        <p>When the historical record runs out, Ahiyaniwa compares Taíno with Lokono, Wayuu, and reconstructed Proto-Lokono-Wayuu roots. Regular sound correspondences help bridge lexical gaps while respecting Taíno’s open-syllable rhythm, intervocalic lenition, and Arawakan grammatical skeleton.</p>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>Mission statement:</strong> Ahiyaniwa is a labor of love: an early-stage, expanding, community-facing reconstruction that honors the original speakers by keeping the language structurally Arawakan, Caribbean in sound, and usable in the modern world.
+    </div>
+  </section>
+
+  <!-- ALPHABET -->
+  <section id="alphabet" class="page">
+    <div class="section-head">
+      <span class="pill gold">Alphabet</span>
+      <h2>The Ahiyaniwa script</h2>
+      <p>This page lists the modern Ahiyaniwa orthography. The <strong>Phonology</strong> page provides details on sound values, allophony, and stress rules.</p>
+    </div>
+
+    <article class="card">
+      <div class="alphabet-grid" id="alphabetGrid"></div>
+      <p class="small" style="margin-top:24px">Ahiyaniwa uses an apostrophe <strong>’</strong> to mark vowel elision between a prefix and a vowel-initial root, e.g. <em>da- + ahiya → d’ahiya</em>. Acute accents mark verb suffixes such as <em>-ká</em>, <em>-bá</em>, <em>-bó</em>, <em>-há</em>, and <em>-té</em>. Tildes mark nasal vowels.</p>
+    </article>
+  </section>
+
+  <!-- PHONOLOGY -->
+  <section id="phonology" class="page">
+    <div class="section-head">
+      <span class="pill">Phonology</span>
+      <h2>Sound system</h2>
+      <p>These are the sound details that belong to the phonology of Ahiyaniwa. The alphabet page lists only the script.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card">
+        <h3>Vowel inventory</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Height</th><th>Front</th><th>Central</th><th>Back</th></tr></thead>
+            <tbody>
+              <tr><td>Close</td><td class="phoneme">ĩ · i</td><td>—</td><td class="phoneme">ũ · u</td></tr>
+              <tr><td>Close-mid</td><td class="phoneme">ẽ</td><td>—</td><td class="phoneme">õ · o</td></tr>
+              <tr><td>Open-mid</td><td class="phoneme">ɛ</td><td>—</td><td>—</td></tr>
+              <tr><td>Open</td><td class="phoneme">ã · a</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Nasal vowels are written with tildes in the modern orthography.</p>
+      </article>
+
+      <article class="card">
+        <h3>Consonant inventory</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Manner</th><th>Bilabial</th><th>Alveolar</th><th>Postalveolar</th><th>Palatal</th><th>Velar</th><th>Glottal</th></tr></thead>
+            <tbody>
+              <tr><td>Plosive</td><td class="phoneme">p · b</td><td class="phoneme">t · d</td><td>—</td><td>—</td><td class="phoneme">k</td><td>—</td></tr>
+              <tr><td>Nasal</td><td class="phoneme">m</td><td class="phoneme">n</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Tap/Flap</td><td>—</td><td class="phoneme">r</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>Fricative</td><td>—</td><td class="phoneme">s</td><td class="phoneme">ʃ</td><td>—</td><td>—</td><td class="phoneme">h</td></tr>
+              <tr><td>Approximant</td><td>—</td><td>—</td><td>—</td><td class="phoneme">j</td><td class="phoneme">w</td><td>—</td></tr>
+              <tr><td>Lateral</td><td>—</td><td class="phoneme">l</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>Syllable structure</h3>
+        <p>CV, V, and CVC are possible. Any consonant can occur syllable-initially, but the coda is highly restricted and consonant clusters are avoided. The language strongly favors open syllables and a smooth, vowel-final rhythm.</p>
+        <p class="small">Template: CV, V, CVC.</p>
+      </article>
+      <article class="card">
+        <h3>Phonological rules</h3>
+        <p><strong>Allophony:</strong> /d/ → [r] between vowels. In Taíno writing, <em>d</em> occurs word-initially, while <em>r</em> is used between vowels.</p>
+        <p><strong>Stress:</strong> usually penultimate, but final if the word ends in /i/, the diphthong /ei/, or a nasal vowel. Vowel suffixes also make stress word-final.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- GRAMMAR -->
+  <section id="grammar" class="page">
+    <div class="section-head">
+      <span class="pill">Grammar</span>
+      <h2>Arawakan grammar, clearly organized</h2>
+      <p>Ahiyaniwa is agglutinative and synthetic. It uses bound morphemes for person, possession, tense, and aspect, and it prefers verb-first word order.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card">
+        <h3>Pronominal prefixes</h3>
+        <div class="table-container">
+          <table>
+            <thead><tr><th>Person</th><th>Singular</th><th>Plural</th></tr></thead>
+            <tbody>
+              <tr><td>1st</td><td><strong>da-</strong> (my / I)</td><td><strong>wa-</strong> (our / we)</td></tr>
+              <tr><td>2nd</td><td><strong>bu-</strong> (your / you)</td><td><strong>hu-</strong> (your PL / you PL)</td></tr>
+              <tr><td>3rd Masc.</td><td><strong>li-</strong> (his / he)</td><td><strong>na-</strong> (their / they)</td></tr>
+              <tr><td>3rd Fem.</td><td><strong>tu-</strong> (her / she)</td><td><strong>na-</strong> (their / they)</td></tr>
+              <tr><td>3rd Inan.</td><td><strong>to-</strong> (its / it)</td><td><strong>na-</strong> (their / they)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Prefixes attach to nouns for possession and to verbs for the subject. Vowel-initial roots trigger elision: da- + ahiya → d’ahiya.</p>
+      </article>
+
+      <article class="card">
+        <h3>Independent emphatic pronouns</h3>
+        <p>Formed with the focus element <strong>-kiya</strong>: <em>dakiya</em> “I / me / myself,” <em>bukiya</em> “you / yourself,” <em>likiya</em> “he / himself,” <em>tukiya</em> “she / herself,” <em>wakiya</em> “we / ourselves,” <em>hukiya</em> “you all / yourselves,” <em>nakiya</em> “they / themselves.” The inanimate pronoun remains <em>to</em>.</p>
+        <p>These are used for emphasis, contrast, or as standalone clause actors.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>Object pronouns</h3>
+        <p>Object pronouns are enclitics placed after the verb or attached to postpositions: <em>de</em> “me,” <em>wo</em> “us,” <em>bu</em> “you,” <em>hu</em> “you all,” <em>li</em> “him,” <em>tu</em> “her,” <em>to</em> “it,” <em>nu</em> “them.”</p>
+      </article>
+      <article class="card">
+        <h3>Articles &amp; plurals</h3>
+        <p><strong>ka-</strong> is an attributive definite prefix for inanimate nouns. Free <strong>li</strong> marks masculine human definiteness; <strong>to</strong> marks feminine/inanimate definiteness. Indefinite <strong>aba</strong> means “a/an”; <strong>ababe / abano</strong> mean “some/several.”</p>
+        <p>Plural suffixes: <strong>-no</strong> animate/human, <strong>-be</strong> inanimate/general.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>Postpositions</h3>
+        <p>Relations come after the noun: <strong>-mũ</strong> “to/for,” <strong>-oriya</strong> “from/of,” <strong>-oma</strong> “with/in the company of,” <strong>-abo</strong> “using/with,” <strong>-yo</strong> “toward,” <strong>-kowa</strong> “at/on,” <strong>-oloko</strong> “inside.”</p>
+      </article>
+      <article class="card">
+        <h3>Verb template</h3>
+        <p><strong>Pronoun prefix + verb root + tense/aspect suffix</strong>. The main suffixes are <strong>-ká</strong> present/stative/habitual, <strong>-bá</strong> past/perfective, <strong>-bó</strong> progressive, and <strong>-há</strong> future/irrealis. Imperatives use <strong>-té</strong>.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>The copula “to be”</h3>
+        <p>The stative suffix <strong>-ká</strong> attaches directly to the pronominal root: <em>daká</em> “I am,” <em>buká</em> “you are,” <em>liká</em> “he is,” <em>tuká</em> “she is,” <em>toká</em> “it is,” <em>waká</em> “we are,” <em>huká</em> “you all are,” <em>naká</em> “they are.” Past: <em>dabá</em> “I was.” Future: <em>dahá</em> “I will be.”</p>
+      </article>
+      <article class="card">
+        <h3>Stative predication</h3>
+        <p><strong>Synthetic:</strong> pronoun prefix + adjective + -ká, e.g. <em>daxaliká</em> “I am happy.” <strong>Analytic:</strong> independent copula + adjective, e.g. <em>daká xali</em> “I am happy.” Both are valid in modern Ahiyaniwa.</p>
+      </article>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:24px">
+      <article class="card">
+        <h3>Negation &amp; commands</h3>
+        <p>Negation uses <strong>ma-</strong>: <em>matoxaliká</em> “it is not happy.” Imperatives prefix the subject and suffix <strong>-té</strong>: <em>b’ahiyaté!</em> “Speak!” <em>hukãmaté!</em> “You all listen!”</p>
+      </article>
+      <article class="card">
+        <h3>Word order</h3>
+        <p>Ahiyaniwa prefers verb-first order: <strong>V-S-O / V-S-Location</strong>. Even when a full noun subject appears, the verb keeps its matching pronoun prefix. Modifiers generally precede the noun.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- DICTIONARY -->
+  <section id="dictionary" class="page">
+    <div class="section-head">
+      <span class="pill gold">Dictionary</span>
+      <h2>Working lexicon</h2>
+      <p>The complete vocabulary currently in the Ahiyaniwa working dictionary. Search by lemma, English gloss, or part of speech.</p>
+    </div>
+    <div class="dict-tools">
+      <div class="search-wrap">
+        <input id="dictSearch" type="search" placeholder="Search: ahiya, water, verb, noun…" aria-label="Search dictionary" />
+      </div>
+      <div id="dictCount" class="count"></div>
+    </div>
+    <div class="dict-table-wrap">
+      <table>
+        <thead><tr><th>Lemma</th><th>Gloss</th><th>Part of speech</th></tr></thead>
+        <tbody id="dictBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section id="examples" class="page">
+    <div class="section-head">
+      <span class="pill coral">Examples</span>
+      <h2>Words, phrases, and original sentences</h2>
+      <p>These examples show Ahiyaniwa in use with standardized spelling: accent marks on verb suffixes, tildes for nasal vowels, and apostrophes before vowel-initial roots.</p>
+    </div>
+
+    <h3 style="margin-bottom: 24px;">Words</h3>
+    <div class="grid grid-4" style="margin-bottom:40px">
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">ahiyaniwa</div><div class="small">language</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">ahiya</div><div class="small">to speak</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">bohiyo</div><div class="small">house</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">ni</div><div class="small">water</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">turei</div><div class="small">sky</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">kasike</div><div class="small">chief</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">yuka</div><div class="small">cassava</div></div>
+      <div class="card" style="padding: 20px; text-align: center;"><div class="lemma">xali</div><div class="small">happy</div></div>
+    </div>
+
+    <h3 style="margin-bottom: 24px;">Phrases</h3>
+    <div class="grid grid-2" style="margin-bottom:40px">
+      <div class="example-card"><div class="ta">Miyari!</div><div class="en">Hello!</div></div>
+      <div class="example-card"><div class="ta">Hahõ!</div><div class="en">Thank you!</div></div>
+      <div class="example-card"><div class="ta">Taiwei!</div><div class="en">Good morning / good day!</div></div>
+      <div class="example-card"><div class="ta">Daká xali.</div><div class="en">I am happy.</div></div>
+    </div>
+
+    <h3 style="margin-bottom: 24px;">Original Sentences</h3>
+    <div class="grid grid-2">
+      <article class="example-card">
+        <div class="ta">Miyari kena maburika! Toká d’iri Maria, tuwei toká b’iri?</div>
+        <div class="en">Hello and welcome! My name is Maria; what is your name?</div>
+        <div class="breakdown">Miyari “hello” + kena “and” + maburika “welcome.” Toká “it is” + d’iri “my name.” Tuwei “what” + toká “it is” + b’iri “your name.”</div>
+      </article>
+      <article class="example-card">
+        <div class="ta">Daká teketa xali, hahõ! Kena d’ahiyabó ahiyaniwa taino b’oma.</div>
+        <div class="en">I am very happy, thank you! And I am speaking the Taíno language with you.</div>
+        <div class="breakdown">Daká “I am” + teketa “very” + xali “happy.” D’ahiyabó “I am speaking” + ahiyaniwa taino “Taíno language” + b’oma “with you.”</div>
+      </article>
+      <article class="example-card">
+        <div class="ta">Hamuwei buká? D’abokabó kasabe kaburēkowa.</div>
+        <div class="en">Are you hungry? I am cooking cassava bread on the griddle.</div>
+        <div class="breakdown">Hamuwei “hungry” + buká “you are.” D’abokabó “I am cooking” + kasabe “cassava bread” + ka-burē-kowa “on the griddle.”</div>
+      </article>
+      <article class="example-card">
+        <div class="ta">Harukarã, w’okonahá karabukoyo d’awõmoma.</div>
+        <div class="en">Tomorrow, we will travel toward the forest with my dog.</div>
+        <div class="breakdown">Harukarã “tomorrow” + w’okonahá “we will travel” + ka-arabuko-yo “toward the forest” + da-awõ-m-oma “with my dog.”</div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="shell footer-inner">
+    <div><strong>Ahiyaniwa Taíno</strong> — created by Casey Alberto Roche, Cuban-American linguist with distant Taíno ancestry.</div>
+    <div>Early-stage revitalization · Arawakan authenticity first.</div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+
+const VOCAB_RAW = `
+'-be|plural suffix (inanimate)|affix
+'-el|"son of" ... semi-(y)el ("son of the semi")|adfix
+'-ha|comparative suffix ("-er")|adfix
+'-hu|abstract/verbal action nominalizer|affix
+'-ka|verb present tense designator, also copular suffix (am/is/are)|affix
+'-kei|like/as|postposition
+'-kowa|at/on|postposition
+'-mũ|to/for|postposition
+'-no|plural suffix (animate)|affix
+'-oloko|in/within|postposition
+'-oma|with, in the company of|postposition
+'-oriya|of/from|postposition
+'-ra|verbalizing suffix, i.e. axula "kiss" --> axulara "to kiss"|affix
+'-ro|feminine nominalizing suffix, similar to "-er"|affix
+'-ti/-tu|agent marker (masculine)/agent marker (feminine)|affix
+'-to|additional nominalizing suffix|affix
+'-wa|adjectival suffix|affix
+'-ya|intrinsic essence/instrumental nominalizer|affix
+'-yo|to/toward|postposition
+Atabei/Atabeira|supreme female semi of fertility, fresh waters, the moon, and creation|proper noun
+Yukahu Bawa Mawarokoti|Spirit of Yuca, the sea, without a male ancestor (epithets of the semi Yukahu)|noun
+a-|to become (sanako --> a-sanako)|prefix
+abaka|five|numeral
+abalira|to mix|verb
+abara|to wait|verb
+abati|six|numeral
+abatu|nail|noun
+abiki|to cut|verb
+aboka|to cook|verb
+abokake|kitchen|noun
+abowa|bad|adjective
+aburota|to write|verb
+abuxi|where|interrogative
+abã|one|numeral
+abãraka|ten|numeral
+abõ|under/beneath|postposition
+ahaira|to climb|verb
+ahei|if|conjunction
+ahi|tooth|noun
+ahirabowa|sorry|adjective
+ahitaremu|to complain|verb
+ahiya|to talk/speak|verb
+ahiyaniwa|language|noun
+ahiyarei|word|noun
+ahuro|to breathe|verb
+ahuta|to push|verb
+ahuyai|air|noun
+ahuyiki|voice|noun
+aikala|to sit|verb
+aikana|chest|noun
+aikili|son|noun
+aikuro|daughter|noun
+ainara|to change|verb
+airina|to seem/appear|verb
+aita|to know|verb
+aitabari|computer|noun
+aitaye|knowledge|noun
+aiwa|to hurt|verb
+aiyala|to cry|verb
+akahi|why|interrogative
+akaiha|smoke|noun
+akaisa|but|conjunction
+akana|to kill|verb
+akawai|to pull|verb
+akibawa|to wash|verb
+akiha|to burn|verb
+akirahawa|to learn|verb
+akiyaha|to dig|verb
+ako|eye|noun
+akoni|tear ("eye-water")|noun
+akowalari|eyelash|noun
+akuna|to touch|verb
+akurata|to jump|verb
+akurikawa|to destroy|verb
+akutu|grandmother|noun
+akuya|fast|adjective
+akũrawa|to swallow|verb
+alaniwa|to flow|verb
+aliha|to read|verb
+alika|who|interrogative
+amula|throat|noun
+amuru|dust|noun
+ana|flower|noun
+anabũ|to wake up|verb
+anahawa|safe|adjective
+anaihi|because|conjunction
+anaka|back (body)|noun
+anaki|enemy|noun
+anako|beautiful/pretty|adjective
+anata|lizard|noun
+anawa|dress|noun
+anika|to make/do|verb
+aniwa|choice|noun
+anixi|heart|noun
+anuihiya|to message/text|verb
+anuka|to take|verb
+anuyu|sick|adjective
+anuyubuwi|hospital ("sick-place")|noun
+anuyuwau|illness/disease|noun
+ara|tree|noun
+arabuko|forest|noun
+arabusa|wood|noun
+arahi|medicine|noun
+araura|bark|noun
+arawani|building|noun
+arei|to sing|verb
+areira|to find|verb
+areito|ceremonial song and dance|noun
+aribeyu|belly/stomach|noun
+aribita|to squeeze|verb
+aribu|chin|noun
+arikai|mouth|noun
+ariki|after|postposition
+arikē|to see|verb
+arira|to feel|verb
+ariyebaru|to translate|verb
+arokoti|grandfather|noun
+arulawa|to hate|verb
+arura|to bite|verb
+aruti|soft|adjective
+aruwera|to sweat|verb
+arãsurix|orange|color
+asa|to ask|verb
+asatala|elbow|noun
+asihara|to laugh|verb
+asita|to pee/urinate|verb
+asiwato|rotten|adjective
+asota|to stab|verb
+asu|sunset|noun
+asurula|to close|verb
+asuwana|near|adjective
+ata|to drink|verb
+atiyawo|brother|noun
+atola|to weave|verb
+atu|leg|noun
+atubana|feather|noun
+atuna|arm|noun
+atũko|to sleep|verb
+auha|to shave|verb
+auyama|pumpkin|noun
+awara|bird|noun
+awaratuna|wing|noun
+awarimo|to grow|verb
+aweiya|young|adjective
+awera|to vomit|verb
+awõ|dog|noun
+axi|pepper|noun
+axihira|to fight|verb
+axika|to give|verb
+axula|kiss|noun
+ayabo|behind|postposition
+ayabuha|to sew|verb
+ayakati|to hide|verb
+ayanaha|to succeed/win|verb
+ayawaha|to count|verb
+ayeike|food|noun
+ayikuna|to lick|verb
+ayiti/kiskeya|Hispaniola|proper noun
+ayoriki|shadow|noun
+ayãta|to buy|verb
+ayētowa|music|noun
+ba|big|adjective
+baba|father (endearing)|noun
+babako|table/desk|noun
+baira|arrow|noun
+bakunei|bus|noun
+balisi|ash|noun
+banuwei|to pray|verb
+barabakowa|barbecue|noun
+bariya|also/too|adverb
+baro|left|adjective
+batata|sweet potato|noun
+batei|plaza/ball court|noun
+batu|ball game|noun
+baura|next|adjective
+bawa|sea/ocean|noun
+bawana|tide|noun
+bayũwa|to accept|verb
+behike|shaman|noun
+behuko|vine|noun
+beyabu|beach|noun
+bibi|mother (endearing)|noun
+bibiti|four|numeral
+bitiya|nine|numeral
+bixube|beans|noun
+biyamari|partner|noun
+biyã|two|numeral
+bohiyo|house|noun
+bokoto|to hold|verb
+boratũ|to help|verb
+bore|wave|noun
+bori|to work|verb
+borikē|Puerto Rico|proper noun
+boriti|worker|noun
+borito|job|noun
+borokuwo|pants|noun
+bu-|you/your|pronoun
+bubakã|net|noun
+buhiti|doctor|noun
+buhu|dry|adjective
+bukiya|you (2sg), free|pronoun
+buna|past|noun
+bunaro|brown|color
+buru|clean|adjective
+burura|narrow|adjective
+burē|cooking griddle|noun
+buti|blue|color
+butukuxu|purple|color
+buwi|place|noun
+buyiri|bat (animal)|noun
+bõ|river|noun
+da-|I/my|pronoun
+dai|down|adverb
+daixi|hole|noun
+dakiya|I (1sg), free|pronoun
+damã|about|postposition
+dara|to open|verb
+daru|father|noun
+darura|rib|noun
+dawui|spine|noun
+daye|tongue|noun
+dino|beard|noun
+dita|bowl|noun
+duho|chair|noun
+dunabo|branch|noun
+dunaina|shoulder|noun
+ebeki|price|noun
+ebihera|toe|noun
+ebira|finger|noun
+eibaha|to follow|verb
+eibawa|to run|verb
+eibũ|bone|noun
+eika|to eat|verb
+eikũ|meal|noun
+eima|lip/lips|noun
+eipuse|thorn|noun
+eira|sound|noun
+eisahi|to say/tell|verb
+eixu|to think|verb
+eixũ|husband|noun
+ekenu|clothing/clothes|noun
+ekiya|to use|verb
+erebei|forehead|noun
+ereto|wife|noun
+ewa|to have|verb
+ewera|penis|noun
+eyora|to lay/lie|verb
+haba|basket|noun
+hahõ|thanks/thank you|interjection
+hai|up|adverb
+haibohirau|roof|noun
+haiwa|hot (temp)|adjective
+halawa|window|noun
+halika|how|interrogative
+hamaka|hammock/bed|noun
+hamuwei|hungry|adjective
+hararo|spoon|noun
+harukarã|tomorrow|adverb
+hasuwa|sour|adjective
+hatu|over/above|postposition
+hawaba|warm|adjective
+hawuta|heavy|adjective
+hayu|ant|noun
+hebe|old|adjective
+hebeyo|ancestor|noun
+hehe|gray|color
+heika|to die|verb
+hekakũ|number|noun
+hekexi|new|adjective
+heme|shirt|noun
+herula|wide|adjective
+hikara|cup/mug|noun
+hikihi|fire|noun
+hikiwiho|volcano|noun
+hikoteya|sea turtle|noun
+hime|fish|noun
+himisa|to smell|verb
+hinama|to stand|verb
+hiriwawo|louse|noun
+hiroma|right (direction)|adjective
+hiwera|gourd|noun
+hiyē|yuca juice|noun
+hobo|pink|color
+hu|to blow|verb
+hu-|you/your (plural)|pronoun
+hukiya|you all (2pl), free|pronoun
+hukõ|short|adjective
+huna|when|interrogative
+hupiya|ghost/spirit of the dead|noun
+hura|wind|noun
+hurakã|hurricane/tropical storm|noun
+hutiya|hutia|noun
+huya|rain|noun
+iba|to go|verb
+ibekeba|full|adjective
+ibira|to play|verb
+ikihe|fat|adjective
+ikina|neck|noun
+ikiwa|please|interjection
+ikiyanei|skinny|adjective
+ikuruku|art|noun
+ikurukuti|artist|noun
+ikē|earth/land|noun
+ili|tail|noun
+imiko|to send|verb
+imobixau|green|color
+inaru|woman|noun
+inewehi|evening/dusk|noun
+irahuli|boy|noun
+irahuro|girl|noun
+iri|name|noun
+iro|man|noun
+irã|late|adjective
+isi|vagina|noun
+ita|blood|noun
+itai|family|noun
+itiba|pregnant|adjective
+itika|poop/feces|noun
+itu|sister|noun
+iwana|iguana|noun
+iyaraika|power|noun
+ka-|article "the"|article
+kabokotox|wrist|noun
+kabuka|important|adjective
+kabuya|rope|noun
+kahara|slow|adjective
+kahuya|delicious|adjective
+kai|calendar day|noun
+kaimã|crocodile|noun
+kaisimu|head|noun
+kaiwaxi|sex|noun
+kakata|spider|noun
+kakona|decorative bead|noun
+kamana|sharp|adjective
+kamara|echo|noun
+kamiti|eight|numeral
+kanabo|in front of|postposition
+kanasibei|pottery|noun
+kanokũ|three|numeral
+kanowa|canoe|noun
+kanē|chief's house|noun
+karaba|oil|noun
+karakasa|week|noun
+karakuri|nose ring|noun
+karalo|book|noun
+karau|grass|noun
+karaura|to break|verb
+karaxi|seven|numeral
+karaya|moon/night|noun
+karoba|ankle|noun
+karobo|plate|noun
+karumahe|dangerous|adjective
+kasabe|cassava bread|noun
+kaseira|loud|adjective
+kasike|chief/leader|noun
+kasiya|to forget|verb
+kasu|ugly|adjective
+katala|to throw|verb
+kawaha|to meet|verb
+kawata|to hunt|verb
+kawona|gold|noun
+kawosu|cheek|noun
+kaxapa|hard (tactile)|adjective
+kaxura|metal|noun
+kaya|island|noun
+kayamale|stairs|noun
+kayamare|bridge|noun
+keburi|hook|noun
+kekeroko|to swell|verb
+kena|and|conjunction
+kepe|coffee|noun
+ketawa|ready|adjective
+kibara|again|adverb
+kibaso|shy|adjective
+kibi|bitter|adjective
+kimo|few|determiner
+kirixiya|nation/country|noun
+kixira|test|noun
+kohoba|hallucinogenic snuff|noun
+koki|frog|noun
+kokoliya|crab|noun
+komexē|termite|noun
+kona|to walk|verb
+konike|things, stuff|noun
+konuko|farm plot|noun
+korehi|baby/infant|noun
+kori|mouse|noun
+korix|red|color
+kororo|knee|noun
+kotara|sandal|noun
+kowa|farming stick|noun
+kowaibei|land of the dead|proper noun
+kowi|bee/wasp|noun
+kowo|snail|noun
+koyowa|round|adjective
+kuba|Cuba|proper noun
+kuiba|to live|verb
+kuiri|to spit|verb
+kukubano|firefly|noun
+kunuku|field/clearing|noun
+kura|to tie|verb
+kurula|cold|adjective
+kusa|or|conjunction
+kusi|worm|noun
+kusiba|ice|noun
+kusibara|to freeze/to ice|verb
+kuwata|to turn|verb
+kãbaru|room|noun
+kãkarã|yesterday|adverb
+kãma|to hear|verb
+kãsihi|to need|verb
+kũsa|eyebrow|noun
+latawa|pen/pencil|noun
+li-|he/his|pronoun
+lihi|this (masculine)|determiner
+lihino|these (masculine)|determiner
+likiya|he (3sg.masc), free|pronoun
+lira|that (masculine)|determiner
+lirano|those (masculine)|determiner
+lirē|fruit|noun
+lu|group|noun
+luku|people|noun
+lukukiya|person|noun
+lukũli|grandson|noun
+lukũro|granddaughter|noun
+ma-|negative prefix|prefix
+maba|honey|noun
+mabei|easy|adjective
+maboya|evil spirit|noun
+maburika|welcome|interjection
+mahis|corn/maize|noun
+maikuwa|weak|adjective
+maina|garden|noun
+makana|weapon|noun
+makulo|stranger|noun
+makuto|bag|noun
+makuwaima|death|noun
+maluwabu|outside|postposition
+manati|manatee|noun
+mani|peanut|noun
+maraha|glass|noun
+marahã|bottle|noun
+mari|can/to be able to|verb
+marã|never|adverb
+masaura|quiet|adjective
+masuruti|wrong ("not-right")|adjective
+matunai|love/sweetie|noun
+matũ|generous|adjective
+matũxeri|gentleman|noun
+mauka|morning/dawn|noun
+maurã|early|adjective
+mawei|drum|noun
+mei|then|adverb
+mikina|master|noun
+mikiya|thin|adjective
+mikiyo|thick|adjective
+miku|door|noun
+mirita|curse|noun
+miyari|hello/hi|interjection
+mukaro|owl|noun
+muruliki|pet|noun
+murulu|animal|noun
+musa|cat|noun
+na-|they/their|pronoun
+nahakã|to drive|verb
+nahe|paddle/oar|noun
+nakiya|they (3pl), free|pronoun
+nakã|middle|postposition
+namari|mirror|noun
+nanibitahu|mist|noun
+ni|water|noun
+nikami|sad|adjective
+nitaino|nobleman|noun
+numara|cousin|noun
+obana|liver|noun
+omawa|between/among|postposition
+onaba|to answer|verb
+onohu|to cough|verb
+oraro|dew|noun
+ori|snake|noun
+oroko|to remember|verb
+otuwanai|to happen|verb
+owaka|to carry|verb
+oya|mother|noun
+oyika|to wipe|verb
+papaya|papaya|noun
+pare|difficult|adjective
+pawowa|to plant/sow|verb
+pipina|error/problem|noun
+pirawa|long boat|noun
+puna|maybe|adverb
+purã|money|noun
+pututo|horn|noun
+pãtã|plastic|noun
+sabana|savanna|noun
+sanako|stupid|adjective
+sari|only/just|adverb
+seisu|coin|noun
+semei|energy|noun
+semi|spirit or deity|noun
+semiku|sweet|adjective
+sera|to sell/trade|verb
+serabohiyo|store ("trade-house")|noun
+siba|stone|noun
+sibaburu|soap|noun
+sibaroko|sugar|noun
+sibukã|cassava press|noun
+simu|face|noun
+sinato|angry|adjective
+siraka|to split|verb
+siruwu|salt|noun
+sisira|smooth|adjective
+siwatu|tired|adjective
+siwi|sand|noun
+somara|bow|noun
+sosowa|to suck|verb
+sowã|to look for/search|verb
+subule|yellow|color
+surihi|path/road|noun
+suruti|right (correct)|adjective
+sũsũ|hummingbird|noun
+tabako|tobacco|noun
+tabũho|to dream|verb
+tai/usa|good|adjective
+taiba|great|adjective
+taikaraya|goodnight/good evening|interjection
+taiwei/taiwehi|good morning/good day|interjection
+taiyakowa|goodbye/bye|interjection
+takara|wall|noun
+takũ|to stop|verb
+tanaho|now/present|adverb
+tanama|butterfly|noun
+tarike|ear|noun
+tata|strong|adjective
+tawawa|earring(s)|noun
+taya|far|adjective
+teketa|very|adverb
+tekina|to teach|verb
+tekinati|teacher|noun
+tekiret(i/u)|student (m/f)|noun
+tekirowo|school|noun
+tibo|bush|noun
+tiboko|nest|noun
+tiburõ|shark|noun
+tikira|to fall|verb
+tikã|empty|adjective
+tima|to swim|verb
+tiyawo|friend|noun
+to-|it/its|pronoun
+toho|this (inanimate)|determiner
+tohobe|these (inanimate)|determiner
+tokauka|season/time of year|noun
+tokowa|all|determiner
+tonina|dolphin|noun
+tora|that (inanimate)|determiner
+torabe|those (inanimate)|determiner
+torahu|lung|noun
+tosa|that, relative clause marker|particle
+towa|breast|noun
+tu-|she/her|pronoun
+tubano|cigar|noun
+tuhi|this (feminine)|determiner
+tuhino|these (feminine)|determiner
+tukiya|she (3sg.fem), free|pronoun
+tukuya|star|noun
+tura|that (feminine)|determiner
+turano|those (feminine)|determiner
+turei|sky|noun
+tuwei|what|interrogative
+tuyu|tall|adjective
+ubana|leaf|noun
+ubararã|future|noun
+ubura|before|postposition
+uhabu|hand|noun
+ukairã|today|adverb
+ukili|weather|noun
+uku|dirt/soil|noun
+ukunei|car|noun
+ukuri|foot|noun
+ukuru|root|noun
+ulaka|to try|verb
+umayusei|thirsty|adjective
+ura|skin|noun
+uraiya|birth|noun
+uraiyawei|birthday|noun
+urakei|story|noun
+urarura|fog|noun
+urite|to scratch|verb
+urohu|cloud|noun
+usikoho|brain|noun
+uwi|meat|noun
+uwõ|hat/headdress|noun
+uyinata|to start|verb
+wa|no|interjection
+wa-|we/our|pronoun
+wabã|storm (general)|noun
+wairina|shoe|noun
+wakaiya|evil|adjective
+wakiya|we (1pl), free|pronoun
+walari|hair|noun
+wali|child|noun
+wama|to want|verb
+wamo|telephone/phone|noun
+wanai|other|adjective
+wanũ|alloy of gold and copper|noun
+wari|long|adjective
+wariko|to come|verb
+wasiwa|to lose/fail|verb
+waya|clay/mud|noun
+wayaba|guava|noun
+wehi/wei|sun/day|noun
+wehikuya|light (from the sun)|noun
+wiho|mountain|noun
+wirika|egg|noun
+wiwa|year|noun
+woyisa|soul/spirit of the living|noun
+wunawu|same|adjective
+wuxi|fly (insect)|noun
+xaimaka|Jamaica|proper noun
+xali|happy|adjective
+xama|bay/inlet|noun
+xara|lake|noun
+xaweye|cave|noun
+xeiti|black|color
+xeri|sir|noun
+xika|shit|noun
+xixa|alcoholic beverage|noun
+xoko|small|adjective
+xoreto|many|determiner
+xoxē|mosquito|noun
+yabo|aunt|noun
+yaha|here|adverb
+yaiwa|to fear|verb
+yamokara|month|noun
+yara|there|adverb
+yarala|knife|noun
+yari|jewel/gem|noun
+yarima|buttocks|noun
+yarutei|dirty|adjective
+yataya|brave|adjective
+yeiyu|to taste|verb
+yorara|to float|verb
+yota|wet|adjective
+yu/hu|white|color
+yuha|to rub|verb
+yuka|yuca/cassava|noun
+yukayeke|village (modern: Taino tribal group)|noun
+yuma|nose|noun
+yã/yãyã|yes|interjection
+ãbei|seed|noun
+ãpaya|neighbor|noun
+ãtira|to bring|verb
+ãxihi|to love|verb
+ũkayeke|city/large town|noun
+ũku|valley|noun
+ũriri|woodpecker|noun
+ũxi|uncle|noun
+ũkura|to hit|verb
+`.trim();
+
+const VOCAB = VOCAB_RAW.split("\n").map(line => {
+  const [lemma, gloss, pos] = line.split("|");
+  return { lemma, gloss, pos };
+});
+
+/* =========================================================
+   ALPHABET (From provided image)
+   ========================================================= */
+
+const ALPHABET_DATA = [
+  { char: "p", ipa: "/p/" },
+  { char: "t", ipa: "/t/" },
+  { char: "k", ipa: "/k/" },
+  { char: "b", ipa: "/b/" },
+  { char: "d", ipa: "/d/" },
+  { char: "s", ipa: "/s/" },
+  { char: "x / sh", ipa: "/ʃ/" },
+  { char: "h", ipa: "/h/" },
+  { char: "m", ipa: "/m/" },
+  { char: "n", ipa: "/n/" },
+  { char: "r", ipa: "/ɾ/" },
+  { char: "l", ipa: "/l/" },
+  { char: "y", ipa: "/j/" },
+  { char: "w", ipa: "/w/" },
+  { char: "a", ipa: "/a/" },
+  { char: "e", ipa: "/ɛ/" },
+  { char: "i", ipa: "/i/" },
+  { char: "o", ipa: "/o/" },
+  { char: "u", ipa: "/u/" },
+  { char: "ã", ipa: "/ã/" },
+  { char: "ẽ", ipa: "/ẽ/" },
+  { char: "ĩ", ipa: "/ĩ/" },
+  { char: "õ", ipa: "/õ/" },
+  { char: "ũ", ipa: "/ũ/" }
+];
+
+const alphabetGrid = document.getElementById("alphabetGrid");
+alphabetGrid.innerHTML = ALPHABET_DATA.map(item =>
+  `<div class="letter-card">
+    <div class="letter-char">${item.char}</div>
+    <div class="letter-ipa">${item.ipa}</div>
+  </div>`
+).join("");
+
+/* =========================================================
+   DICTIONARY
+   ========================================================= */
+
+const dictBody = document.getElementById("dictBody");
+const dictSearch = document.getElementById("dictSearch");
+const dictCount = document.getElementById("dictCount");
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[ch]));
+}
+
+function renderDictionary(filter = ""){
+  const q = filter.toLowerCase().trim();
+  const rows = VOCAB.filter(v =>
+    !q || `${v.lemma} ${v.gloss} ${v.pos}`.toLowerCase().includes(q)
+  );
+  dictBody.innerHTML = rows.map(v =>
+    `<tr>
+      <td class="lemma">${escapeHTML(v.lemma)}</td>
+      <td>${escapeHTML(v.gloss)}</td>
+      <td><span class="pill" style="margin:0; background:rgba(10,46,44,.05); color:var(--muted); font-size:0.7rem;">${escapeHTML(v.pos)}</span></td>
+    </tr>`
+  ).join("");
+  dictCount.textContent = `${rows.length} of ${VOCAB.length} lemmas`;
+}
+
+dictSearch.addEventListener("input", e => renderDictionary(e.target.value));
+renderDictionary();
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.classList.toggle("active", p.id === id));
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.page === id));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => showPage(tab.dataset.page));
+});
+
+document.querySelectorAll("[data-goto]").forEach(btn => {
+  btn.addEventListener("click", () => showPage(btn.dataset.goto));
+});
+</script>
+</body>
+</html>
